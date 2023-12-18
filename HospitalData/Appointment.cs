@@ -60,6 +60,8 @@ namespace HospitalData
         [MaxLength(11)]
         [Display(Name = "Phone")]
         public int Phone { get; set; }
+        [Display(Name="Password")]
+        public int Password { get; set; }
         public ICollection<Appointment> Appointments { get; set; }
 
 
