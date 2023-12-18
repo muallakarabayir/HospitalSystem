@@ -14,10 +14,7 @@ namespace HospitalSystem
         }
         private static void AddBranchs(HospitalDataContext context)
         {
-            var branch= context.Branches.FirstOrDefault();
-            if (branch != null) return;
-            
-          
+           
           
      
             context.SaveChanges();
