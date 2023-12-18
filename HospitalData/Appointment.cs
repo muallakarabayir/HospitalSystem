@@ -15,6 +15,8 @@ namespace HospitalData
         [Required]
         public DateTime Date { get; set; }
         [Required]
+        public int Time {  get; set; }
+        [Required]
         public User User { get; set; }
         [Required]
         public Doctor Doctor { get; set; }
@@ -62,6 +64,7 @@ namespace HospitalData
         public int Phone { get; set; }
         public ICollection<Appointment> Appointments { get; set; }
 
+        public string Password {  get; set; }
 
 
     }
@@ -69,7 +72,7 @@ namespace HospitalData
     {
         [Required]
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         public ICollection<Doctor> Doctors { get; set; }

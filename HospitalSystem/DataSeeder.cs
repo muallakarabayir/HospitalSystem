@@ -10,14 +10,42 @@ namespace HospitalSystem
             using var scope=host.Services.CreateScope();
             using var context = scope.ServiceProvider.GetRequiredService<HospitalDataContext>();
             context.Database.EnsureCreated();
-            AddBranchs(context);
+            
         }
-        private static void AddBranchs(HospitalDataContext context)
+       /* private static void AddBranchs(HospitalDataContext context)
         {
-           
-          
-     
+            var branch = context.Branches.FirstOrDefault();
+            if(branch != null )
+            {
+                return;
+            }
+            context.Branches.Add( new Branch
+            {
+                Id=1,
+                Name= "Gediatric",
+                Doctors = new List< Doctor> 
+                { 
+                   new Doctor {Name="Gökhan"},
+                   new Doctor{Name="Merve"}
+                }
+
+
+            });
+            context.Branches.Add(new Branch
+            {
+                Id = 2,
+                Name = "General Surgery",
+                Doctors = new List<Doctor>
+                {
+                   new Doctor {Name="Gökhan"},
+                   new Doctor{Name="Merve"}
+                }
+
+
+            });
+
+
             context.SaveChanges();
-        }
+        }*/
     }
 }
