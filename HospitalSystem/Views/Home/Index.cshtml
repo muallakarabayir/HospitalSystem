@@ -1,0 +1,16 @@
+﻿@model IEnumerable<HospitalSystem.ViewModels.UsersViewModel>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@foreach(var user in Model)
+{
+    <h1>@user.IdentityNo</h1>
+    <p>@user.Name</p>
+    <p>@user.Surname</p>
+    <p>@user.Phone</p>
+    <p>@user.Email</p>
+}
