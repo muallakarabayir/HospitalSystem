@@ -23,6 +23,21 @@ namespace HospitalSystem
             {
                 Id=1,
                 Name="KBB",
+                Doctors = new List<Doctor> {
+                    new Doctor { 
+                        Id = 1,
+                        Name="Gökhan",
+                        Surname="Dönmez",
+                        
+                    },
+                    new Doctor{ 
+                        Id = 2,
+                        Name="Merve",
+                        Surname="Develi"
+
+                    }
+                
+                }
                 
             });
             context.Policlinics.Add(new Policlinic
