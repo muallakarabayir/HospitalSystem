@@ -10,42 +10,31 @@ namespace HospitalSystem
             using var scope=host.Services.CreateScope();
             using var context = scope.ServiceProvider.GetRequiredService<HospitalDataContext>();
             context.Database.EnsureCreated();
-            
+            AddPoliclinics(context);
+        
         }
-       /* private static void AddBranchs(HospitalDataContext context)
+        private static void AddPoliclinics(HospitalDataContext context)
         {
-            var branch = context.Branches.FirstOrDefault();
-            if(branch != null )
-            {
-                return;
-            }
-            context.Branches.Add( new Branch
+            var policlinic = context.Policlinics.FirstOrDefault();
+            if (policlinic != null)return;
+            
+
+            context.Policlinics.Add(new Policlinic
             {
                 Id=1,
-                Name= "Gediatric",
-                Doctors = new List< Doctor> 
-                { 
-                   new Doctor {Name="Gökhan"},
-                   new Doctor{Name="Merve"}
-                }
-
-
+                Name="KBB",
+                
             });
-            context.Branches.Add(new Branch
+            context.Policlinics.Add(new Policlinic
             {
                 Id = 2,
-                Name = "General Surgery",
-                Doctors = new List<Doctor>
-                {
-                   new Doctor {Name="Gökhan"},
-                   new Doctor{Name="Merve"}
-                }
-
-
+                Name = "PDA"
             });
-
-
             context.SaveChanges();
-        }*/
+
+        }
+       
+
+
     }
 }

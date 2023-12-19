@@ -36,6 +36,9 @@ namespace HospitalData.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Time")
+                        .HasColumnType("integer");
+
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
@@ -62,7 +65,7 @@ namespace HospitalData.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Branch");
+                    b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("HospitalData.Doctor", b =>
@@ -81,8 +84,8 @@ namespace HospitalData.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("PoliclinicId")
-                        .HasColumnType("text");
+                    b.Property<int?>("PoliclinicId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -100,8 +103,11 @@ namespace HospitalData.Migrations
 
             modelBuilder.Entity("HospitalData.Policlinic", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -132,13 +138,16 @@ namespace HospitalData.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
-
-                    b.Property<string>("PoliclinicId")
                         .HasColumnType("text");
+
+                    b.Property<int>("Phone")
+                        .HasMaxLength(11)
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PoliclinicId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Surname")
                         .IsRequired()

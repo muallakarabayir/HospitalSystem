@@ -1,31 +1,33 @@
 ﻿using HospitalData;
 using HospitalSystem.Models;
 using HospitalSystem.ViewModels;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
+
+
 namespace HospitalSystem.Controllers
 {
-    public class HomeController : Controller
+    
+    public class AppointmentController:Controller
     {
         private readonly HospitalDataContext context;
-      
-        public HomeController(HospitalDataContext context)
+        public AppointmentController(HospitalDataContext context)
         {
 
             this.context = context;
-            
+
         }
-       
         public IActionResult Index()
         {
-           
-            return View();
-        }
+            // Fetch policlinic names from the database
+            var policlinicNames = context.Policlinics.Select(p => p.Name).ToList();
 
-        public IActionResult Privacy()
-        {
+            ViewData["PoliclinicNames"] = policlinicNames;
+
+
             return View();
         }
 
@@ -34,5 +36,6 @@ namespace HospitalSystem.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

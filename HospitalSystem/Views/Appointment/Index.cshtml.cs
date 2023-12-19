@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HospitalSystem.Views.Home
+namespace HospitalSystem.Views.Appointment
 {
     public class ApponitmentModel : PageModel
     {

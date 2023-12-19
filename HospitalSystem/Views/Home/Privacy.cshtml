@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalSystem.ViewModels.PoliclinicViewModel>
+﻿@model IEnumerable<HospitalSystem.ViewModels.BranchViewModel>
 
 @{
     ViewData["Title"] = "Appointment scheduling";
@@ -6,52 +6,5 @@
 <h1>@ViewData["Title"]</h1>
 
 
-
-<div class="mb-3 row">
-    <div class="col-4">
-        <label for="exampleDataList" class="form-label">Policlinic</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option>
-                @Html.DisplayNameFor(model=>model.Name)
-            </option>
-        </select>
-    </div>
-    <div class="col-4">
-        <label for="exampleDataList" class="form-label">Date</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-    </div>
-    <div class="col-4">
-        <label for="exampleDataList" class="form-label">Time</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-    </div>
-</div>
-<div class="mb-3 row">
-    <div class="col-6">
-        <label for="exampleDataList" class="form-label">Doctor</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <button type="button" class="btn " style="background-color: #e3f2fd;">Send</button>
-        </div>
-    </div>
-</div>
+<div>PRIVACY</div>
 

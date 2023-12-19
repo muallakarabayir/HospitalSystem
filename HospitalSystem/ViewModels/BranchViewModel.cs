@@ -1,9 +1,12 @@
-﻿namespace HospitalSystem.ViewModels
+﻿using HospitalData;
+
+namespace HospitalSystem.ViewModels
 {
-    public class PoliclinicViewModel
+    public class BranchViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         
     }
 }
