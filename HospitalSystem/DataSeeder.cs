@@ -17,13 +17,13 @@ namespace HospitalSystem
         {
             var policlinic = context.Policlinics.FirstOrDefault();
             if (policlinic != null)return;
-            
 
+            System.Diagnostics.Debug.WriteLine("defe");
             context.Policlinics.Add(new Policlinic
             {
                 Id=1,
                 Name="KBB",
-                Doctors = new List<Doctor> {
+                Doctors = {
                     new Doctor { 
                         Id = 1,
                         Name="Gökhan",

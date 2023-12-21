@@ -35,6 +35,7 @@ namespace HospitalData
         [Display(Name = "Surname")]
         public string Surname { get; set; }
         [Required]
+
         public Branch Branch { get; set; }
         public ICollection<Appointment> Appointments { get; set; }
 
@@ -63,7 +64,7 @@ namespace HospitalData
         [Display(Name = "Phone")]
         public int Phone { get; set; }
         [Display(Name="Password")]
-        public int Password { get; set; }
+    
         public ICollection<Appointment> Appointments { get; set; }
 
         public string Password {  get; set; }
