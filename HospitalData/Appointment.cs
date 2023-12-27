@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace HospitalData
 {
@@ -41,7 +42,7 @@ namespace HospitalData
 
         
     }
-    public class User
+    public class User : IdentityUser
     {
         [Required]
         [Key]

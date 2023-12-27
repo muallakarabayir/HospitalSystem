@@ -4,10 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+
+using Microsoft.Build.Tasks;
+
+
 
 namespace HospitalData
 {
-    public class HospitalDataContext :DbContext
+    public class HospitalDataContext :IdentityDbContext<User>
     {
         public HospitalDataContext(DbContextOptions<HospitalDataContext>options) : 
             base(options) 
@@ -15,9 +23,14 @@ namespace HospitalData
         
         
         }
+        public DbSet<ApplicationUser>ApplicationUsers{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
             modelBuilder.UseSerialColumns();
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .HasKey(login => new { login.LoginProvider, login.ProviderKey });
         }
 
         public DbSet<User> Users { get; set; }
@@ -25,5 +38,7 @@ namespace HospitalData
         public DbSet<Appointment>Appointments { get; set; }
         public DbSet<Policlinic> Policlinics { get; set;}
         public DbSet<Branch> Branches { get; set; }
+       
     }
+
 }
