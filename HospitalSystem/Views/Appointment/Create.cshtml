@@ -1,0 +1,80 @@
+﻿@model HospitalData.Appointment
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create Doctor</h1>
+
+
+
+<div class="mb-3 row">
+    <div class="form-group">
+        <label asp-for="Policlinic" class="control-label"></label>
+        <select id="PoliclinicId" asp-for="PoliclinicId" name="PoliclinicId" asp-items="@ViewBag.Policlinics" class="form-control" onchange="getDoctors()">
+        </select>
+    </div>
+    <!-- Doktor seçimi -->
+    <div class="form-group">
+        <label asp-for="Doctor" class="control-label"></label>
+        <select asp-for="DoctorId" name="DoctorId" class="form-control" id="DoctorId">
+            <option selected>Select a doctor</option>
+        </select>
+    </div>
+</div>
+<div class="mb-3 row">
+    <div class="col-6">
+        <label for="exampleDataList" class="form-label">Date</label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+
+        </select>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn " style="background-color: #e3f2fd;">Send</button>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function getDoctors() {
+            var policlinicId = document.getElementById("PoliclinicId").value;
+            var doctorSelect = document.getElementById("DoctorId");
+
+            fetch(`/Appointment/GetDoctorsByPoliclinic?policlinicId=${policlinicId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+
+                    // Doktor select'ini temizle
+                    doctorSelect.innerHTML = "";
+
+                    // Boş bir option ekleyin (seçiniz veya bir başlık gibi)
+                    var defaultOption = document.createElement("option");
+                    defaultOption.text = "Select a doctor";
+                    defaultOption.value = "";
+                    doctorSelect.add(defaultOption);
+
+                    // Gelen doktor verilerini option olarak ekleyin
+                    data.forEach(doctor => {
+                        var option = document.createElement("option");
+                        option.text = `${doctor.name} ${doctor.surname}`;
+                        option.value = doctor.Id;
+                        doctorSelect.add(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            getDoctors();
+        });
+    </script>
+}

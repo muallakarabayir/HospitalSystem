@@ -26,6 +26,12 @@ namespace HospitalData
         public int DoctorId {  get; set; }
         [ForeignKey("DoctorId")]
         public Doctor Doctor { get; set; }
+        [Required]
+        public int PoliclinicId { get; set; }
+
+
+        [ForeignKey("PoliclinicId")]
+        public Policlinic Policlinic { get; set; }
     }
     public class Doctor
     {
@@ -46,12 +52,10 @@ namespace HospitalData
         [ForeignKey("BranchId")]
         public Branch Branch { get; set; }
         [Required]
-        public int PoliclinicId {  get; set; }
+        public int PoliclinicId { get; set; }
         [ForeignKey("PoliclinicId")]
-        public Policlinic policlinic {  get; set; }
+        public Policlinic Policlinic {  get; set; }
         public ICollection<Appointment> Appointments { get; set; }
-
-        
     }
     public class User : IdentityUser
     {

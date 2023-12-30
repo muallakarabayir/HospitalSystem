@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
+using System.Numerics;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace HospitalSystem.Controllers
@@ -59,17 +60,16 @@ namespace HospitalSystem.Controllers
                 var branchForDoctor = _context.Branches.FirstOrDefault(i => i.Id == doctor.BranchId);
                 var policlinicForDoctor= _context.Policlinics.FirstOrDefault( i => i.Id ==doctor.PoliclinicId);
                 
-                
                 Doctor doctorEntity = new Doctor
                 {
                     Name= doctor.Name,
                     Surname= doctor.Surname,
                     Branch=branchForDoctor ,
-                    policlinic=policlinicForDoctor
+                    Policlinic=policlinicForDoctor
                 };
 
                 _context.Add(doctorEntity);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             
             return View();
@@ -96,25 +96,41 @@ namespace HospitalSystem.Controllers
             }
         }
 
-        // GET: Doctors/Delete/5
-        public ActionResult Delete(int id)
+        // GET: AuthorAuto/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null || _context.Doctors== null)
+            {
+                return NotFound();
+            }
+
+            var doctor = await _context.Doctors
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+
+            return View(doctor);
         }
 
-        // POST: Doctors/Delete/5
-        [HttpPost]
+        // POST: AuthorAuto/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            if (_context.Doctors == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'WABookStoreContext.Doctors'  is null.");
             }
-            catch
+            var doctor = await _context.Doctors.FindAsync(id);
+            if (doctor != null)
             {
-                return View();
+                _context.Doctors.Remove(doctor);
             }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
