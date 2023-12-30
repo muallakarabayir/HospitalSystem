@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Diagnostics;
-
-
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HospitalSystem.Controllers
 {
@@ -35,23 +35,44 @@ namespace HospitalSystem.Controllers
         // GET: Doctors/Create
         public IActionResult Create()
         {
-            ViewBag.BranchList = new SelectList(_context.Branches, "Id", "Name");
+            ViewBag.Branches = _context.Branches.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            ViewBag.Policlinics = _context.Policlinics.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Branch.Id")] Doctor doctor)
+        public async Task<IActionResult> Create([Bind("Name,Surname,BranchId,PoliclinicId")] Doctor doctor)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid ||true)
             {
-                _context.Add(doctor    );
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                var branchForDoctor = _context.Branches.FirstOrDefault(i => i.Id == doctor.BranchId);
+                var policlinicForDoctor= _context.Policlinics.FirstOrDefault( i => i.Id ==doctor.PoliclinicId);
+                
+                
+                Doctor doctorEntity = new Doctor
+                {
+                    Name= doctor.Name,
+                    Surname= doctor.Surname,
+                    Branch=branchForDoctor ,
+                    policlinic=policlinicForDoctor
+                };
 
-            ViewBag.BranchList = new SelectList(_context.Branches, "Id", "Name", doctor.Branch);
-            return View(doctor);
+                _context.Add(doctorEntity);
+                _context.SaveChangesAsync();
+            }
+            
+            return View();
         }
 
         // GET: Doctors/Edit/5

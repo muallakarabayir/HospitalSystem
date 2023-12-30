@@ -12,10 +12,7 @@
         <label for="exampleDataList" class="form-label">Policlinic</label>
         <select class="form-select" aria-label="Default select example">
             <option selected>Choose a Policlinic</option>
-            @foreach (var policlinicName in ViewData["PoliclinicNames"] as List<string>)
-            {
-                <option>@policlinicName</option>
-            }
+            
         </select>
     </div>
     <div class="col-4">

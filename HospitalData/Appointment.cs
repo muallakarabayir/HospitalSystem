@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalData
 {
@@ -18,8 +19,12 @@ namespace HospitalData
         [Required]
         public int Time {  get; set; }
         [Required]
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
         public User User { get; set; }
         [Required]
+        public int DoctorId {  get; set; }
+        [ForeignKey("DoctorId")]
         public Doctor Doctor { get; set; }
     }
     public class Doctor
@@ -36,8 +41,14 @@ namespace HospitalData
         [Display(Name = "Surname")]
         public string Surname { get; set; }
         [Required]
+        public int BranchId {  get; set; }
 
+        [ForeignKey("BranchId")]
         public Branch Branch { get; set; }
+        [Required]
+        public int PoliclinicId {  get; set; }
+        [ForeignKey("PoliclinicId")]
+        public Policlinic policlinic {  get; set; }
         public ICollection<Appointment> Appointments { get; set; }
 
         
@@ -64,10 +75,8 @@ namespace HospitalData
         [MaxLength(11)]
         [Display(Name = "Phone")]
         public int Phone { get; set; }
-        [Display(Name="Password")]
-    
         public ICollection<Appointment> Appointments { get; set; }
-
+        [Display(Name = "Password")]
         public string Password {  get; set; }
 
 
@@ -78,6 +87,7 @@ namespace HospitalData
         [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
         public ICollection<Doctor> Doctors { get; set; }
         public ICollection <User> Users { get; set; }
@@ -89,6 +99,7 @@ namespace HospitalData
         [Key]
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
         public ICollection<Doctor> Doctors { get; set; }
     }

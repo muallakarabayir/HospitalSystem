@@ -30,19 +30,25 @@ namespace HospitalSystem.Controllers
         // GET: BranchController/Create
         public ActionResult Create()
         {
+
+            
             return View();
         }
 
         // POST: BranchController/Create
         [HttpPost]
-
-        public IActionResult Create([Bind("Id,Name")] Branch branch)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name")] Branch branch)
         {
-            _context.Branches.Add(branch);
-            _context.SaveChanges();
-            return RedirectToAction("Create");
-
+            if (ModelState.IsValid || true)
+            {
+                _context.Add(branch);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(branch);
         }
+
 
         // GET: BranchController/Edit/5
         public ActionResult Edit(int id)

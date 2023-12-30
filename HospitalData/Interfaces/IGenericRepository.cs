@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HospitalData.Interfaces
 {
-    internal interface IGenericRepository<T>: IDisposable
+    internal interface IGenericRepositorycs<T>: IDisposable
     {
         IEnumerable<T> GetAll(
           Expression<Func<T, bool>> filter=null,

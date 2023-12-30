@@ -9,7 +9,7 @@ namespace HospitalSystem
         {
             using var scope=host.Services.CreateScope();
             using var context = scope.ServiceProvider.GetRequiredService<HospitalDataContext>();
-            context.Database.EnsureCreated();
+        
            
         
         }

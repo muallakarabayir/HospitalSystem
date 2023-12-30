@@ -3,6 +3,7 @@ using HospitalSystem.Models;
 using HospitalSystem.ViewModels;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
@@ -13,19 +14,23 @@ namespace HospitalSystem.Controllers
     
     public class AppointmentController:Controller
     {
-        private readonly HospitalDataContext context;
+        private readonly HospitalDataContext _context;
         public AppointmentController(HospitalDataContext context)
         {
-
-            this.context = context;
+            _context = context;
 
         }
         public IActionResult Index()
         {
-            // Fetch policlinic names from the database
-            var policlinicNames = context.Policlinics.Select(p => p.Name).ToList();
+            
 
-            ViewData["PoliclinicNames"] = policlinicNames;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Appointment appointment , int selectedPoliclinicsId)
+        {
+         
 
 
             return View();
